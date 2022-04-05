@@ -1,0 +1,36 @@
+{
+  "changelogDate": "20220405170906",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "customer",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "projectType",
+      "fieldType": "ProjectType",
+      "fieldValues": "FIXEDPRICE,TNM,ODC"
+    },
+    {
+      "fieldName": "projectStatus",
+      "fieldType": "ProjectStatus",
+      "fieldValues": "ACTIVE,INACTIVE"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Project",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

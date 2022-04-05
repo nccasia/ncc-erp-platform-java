@@ -48,6 +48,7 @@ public class CacheConfiguration {
             createCache(cm, asia.ncc.erp.projects.domain.User.class.getName());
             createCache(cm, asia.ncc.erp.projects.domain.Authority.class.getName());
             createCache(cm, asia.ncc.erp.projects.domain.User.class.getName() + ".authorities");
+            createCache(cm, asia.ncc.erp.projects.domain.Project.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
