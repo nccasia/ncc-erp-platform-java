@@ -5,6 +5,10 @@ import asia.ncc.erp.hrm.repository.EmployeeRepository;
 import asia.ncc.erp.hrm.service.dto.EmployeeDTO;
 import asia.ncc.erp.hrm.service.mapper.EmployeeMapper;
 import java.util.Optional;
+import java.util.Random;
+
+import asia.ncc.erp.hrm.service.mapper.KafkaEmployeeMapper;
+import asia.ncc.erp.platformsdk.PlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -24,10 +28,15 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
     private final EmployeeMapper employeeMapper;
+    private final KafkaEmployeeMapper kafkaEmployeeMapper;
 
-    public EmployeeService(EmployeeRepository employeeRepository, EmployeeMapper employeeMapper) {
+    private final PlatformService platformService;
+
+    public EmployeeService(EmployeeRepository employeeRepository, EmployeeMapper employeeMapper, KafkaEmployeeMapper kafkaEmployeeMapper, PlatformService platformService) {
         this.employeeRepository = employeeRepository;
         this.employeeMapper = employeeMapper;
+        this.kafkaEmployeeMapper = kafkaEmployeeMapper;
+        this.platformService = platformService;
     }
 
     /**
@@ -39,8 +48,10 @@ public class EmployeeService {
     public EmployeeDTO save(EmployeeDTO employeeDTO) {
         log.debug("Request to save Employee : {}", employeeDTO);
         Employee employee = employeeMapper.toEntity(employeeDTO);
-        employee = employeeRepository.save(employee);
-        return employeeMapper.toDto(employee);
+        //employee = employeeRepository.save(employee);
+        platformService.saveEmployee(kafkaEmployeeMapper.toEntity(employeeDTO));
+        employeeDTO.setId(new Random().nextLong());
+        return employeeDTO;
     }
 
     /**
