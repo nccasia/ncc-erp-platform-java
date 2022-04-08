@@ -1,7 +1,7 @@
 package asia.ncc.erp.platformsdk;
 
 import asia.ncc.erp.platformsdk.config.kafka.producer.MessageProducer;
-import asia.ncc.erp.platformsdk.dto.EmployeeDTO;
+import asia.ncc.erp.platformsdk.dto.KafkaEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,11 @@ public class PlatformService {
     @Autowired
     private MessageProducer messageProducer;
 
-    public void saveEmployee(EmployeeDTO employee) {
+    public void sendMessage(String message) {
+        messageProducer.sendMessage(message);
+    }
+
+    public void saveEmployee(KafkaEmployee employee) {
         messageProducer.sendGreetingMessage(employee);
     }
 }

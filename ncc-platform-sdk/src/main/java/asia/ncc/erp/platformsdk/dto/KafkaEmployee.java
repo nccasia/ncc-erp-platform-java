@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-public class EmployeeDTO implements Serializable {
+public class KafkaEmployee implements Serializable {
 
     private Long id;
 
@@ -61,11 +61,11 @@ public class EmployeeDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof EmployeeDTO)) {
+        if (!(o instanceof KafkaEmployee)) {
             return false;
         }
 
-        EmployeeDTO employeeDTO = (EmployeeDTO) o;
+        KafkaEmployee employeeDTO = (KafkaEmployee) o;
         if (this.id == null) {
             return false;
         }

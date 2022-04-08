@@ -1,6 +1,7 @@
 package asia.ncc.erp.platform.config.consumer;
 
 import asia.ncc.erp.platform.service.EmployeeService;
+import asia.ncc.erp.platformsdk.dto.KafkaEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.TopicPartition;
@@ -8,7 +9,6 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
-import asia.ncc.erp.platform.service.dto.EmployeeDTO;
 import asia.ncc.erp.platform.service.mapper.KafkaEmployeeMapper;
 
 @Component
@@ -46,7 +46,7 @@ public class MessageListener {
     }
 
     @KafkaListener(topics = "${greeting.topic.name}", containerFactory = "greetingKafkaListenerContainerFactory")
-    public void greetingListener(asia.ncc.erp.platformsdk.dto.EmployeeDTO greeting) {
+    public void greetingListener(KafkaEmployee greeting) {
         employeeService.save(kafkaEmployeeMapper.toDto(greeting));
         System.out.println("Received greeting message: " + greeting);
     }
